@@ -41,13 +41,13 @@ public class LoginFilter implements Filter {
         String context_path = ((HttpServletRequest)request).getContextPath();
         String servlet_path = ((HttpServletRequest)request).getServletPath();
 
-        if(!servlet_path.matches("/css.*")) {       //CSSは認証処理から除外
+        if(!servlet_path.matches("/css.*")) {//CSSは認証処理から除外
             HttpSession session = ((HttpServletRequest)request).getSession();
 
             //従業員(ログインユーザー)情報を取得
             Employee e = (Employee)session.getAttribute("login_employee");
 
-            if(!servlet_path.equals("/login")) {        //ログイン画面以外の扱い
+            if(!servlet_path.equals("/login")) {//ログイン画面以外
                 //ログアウトしていればログイン画面にリダイレクト
                 if(e == null) {
                     ((HttpServletResponse)response).sendRedirect(context_path + "/login");
